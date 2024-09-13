@@ -1,7 +1,9 @@
 cabal-version:       3.12
+-- cabal-version:       2.4
 name:                my-haskell-project
 version:             0.1.0.0
 build-type:          Simple
+-- hs-source-dirs:      app, src
 
 executable my-haskell-project
   main-is:             Main.hs
@@ -10,3 +12,26 @@ executable my-haskell-project
   build-depends:       base >=4.7 && <5
   default-language:    Haskell2010
 
+executable algebra
+  main-is:             Algebra.hs
+  -- main-is:             app/Algebra.hs
+  hs-source-dirs:      app, src
+  other-modules:       MathFunctions
+  -- other-modules:       MathFunctions
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell2010
+
+-- executable speed
+--   main-is:             Speed.hs
+--   build-depends:       base >= 4.7 && < 5
+--   default-language:    Haskell2010
+--
+-- executable acceleration
+--   main-is:             Acceleration.hs
+--   build-depends:       base >= 4.7 && < 5
+--  default-language:    Haskell2010
+
+-- NOTES:
+-- cabal build
+-- cabal exec my-haskell-project
+-- cabal exec algebra

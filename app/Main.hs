@@ -1,4 +1,3 @@
--- app/Main.hs
 module Main where
 
 import MathFunctions (addTwoNumbers, subtractTwoNumbers, multiplyTwoNumbers, divideTwoNumbers, sumList, fibonacci, factorial, pythagorean, isPrime)
