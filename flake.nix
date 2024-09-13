@@ -13,7 +13,8 @@
           inherit system;
           overlays = [
             (self: super: {
-              my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" (self.flake) {};
+              #my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" (self.flake) {};
+              my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" ./app {};
             })
           ];
         };
