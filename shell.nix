@@ -1,16 +1,15 @@
-{
-  callPackage,
-  ghc,
-  cabal-install,
-  #...
-}: let
-  mainPkg = callPackage ./default.nix {};
-in
-  mainPkg.overrideAttrs (oa: {
-    nativeBuildInputs = [
-      #...
-      ghc
-      cabal-install
-    ]
-    ++ (oa.nativeBuildInputs or []);
-  })
+{ pkgs ? import <nixpkgs> {} }:
+(pkgs.haskellPackages.mkDerivation {
+  pname = "my-haskell-project";
+  version = "0.1.0";
+  src = ./.;
+
+  buildInputs = [
+    pkgs.haskellPackages.cabal-install
+  ];
+
+  buildPhase = ''
+    cabal build
+  '';
+})
+

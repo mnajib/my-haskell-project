@@ -1,14 +1,7 @@
-{
-  stdenv,
-  ghc,
-  cabal-install,
-}:
-stdenv.mkDerivation {
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShell {
   buildInputs = [
-    ghc
-    cabal-install
+    pkgs.haskellPackages.ghc
+    pkgs.haskellPackages.cabal-install
   ];
-  name = "najib-haskell-packages";
-  version = "0.0.1";
-  src = ./.;
 }
