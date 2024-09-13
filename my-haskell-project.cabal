@@ -1,8 +1,19 @@
 cabal-version:       3.12
 -- cabal-version:       2.4
+
 name:                my-haskell-project
 version:             0.1.0.0
+synopsis:            A simple Haskell project with CLI tools
+description:         A Haskell project that includes CLI tools for algebra, speed, and acceleration calculations.
+author:              NajibMalaysia
+maintainer:          mnajib@gmail.com
+
+license:             MIT
+license-file:        LICENSE
+
+category:            Development
 build-type:          Simple
+
 -- hs-source-dirs:      app, src
 
 executable my-haskell-project
