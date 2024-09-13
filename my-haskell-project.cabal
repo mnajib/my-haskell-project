@@ -1,0 +1,12 @@
+cabal-version:       3.12
+name:                my-haskell-project
+version:             0.1.0.0
+build-type:          Simple
+
+executable my-haskell-project
+  main-is:             Main.hs
+  hs-source-dirs:      app, src
+  other-modules:       MathFunctions
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell2010
+
