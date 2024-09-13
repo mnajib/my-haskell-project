@@ -1,5 +1,5 @@
-cabal-version:       3.12
--- cabal-version:       2.4
+cabal-version:       2.4
+-- cabal-version:       3.12
 
 name:                my-haskell-project
 version:             0.1.0.0
@@ -8,8 +8,8 @@ description:         A Haskell project that includes CLI tools for algebra, spee
 author:              NajibMalaysia
 maintainer:          mnajib@gmail.com
 
-license:             MIT
-license-file:        LICENSE
+-- license:             MIT
+-- license-file:        LICENSE
 
 category:            Development
 build-type:          Simple
