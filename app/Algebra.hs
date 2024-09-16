@@ -10,7 +10,7 @@ main = do
     args <- getArgs
 
     putStrLn "Algebra Commands:"
-    putStrLn "1. Addition of 3 and 5"
+    putStrLn "1. Addition of 3 and 7"
     putStrLn "2. Subtraction of 10 and 7"
     putStrLn "3. Multiplication of 4 and 6"
     putStrLn "4. Division of 20 by 4"
@@ -23,7 +23,7 @@ main = do
     putStrLn "Choose an option (1-9):"
     option <- getLine
     case option of
-        "1" -> print (addTwoNumbers 3 5)
+        "1" -> print (addTwoNumbers 3 7)
         "2" -> print (subtractTwoNumbers 10 7)
         "3" -> print (multiplyTwoNumbers 4 6)
         "4" -> print (divideTwoNumbers 20 4)
