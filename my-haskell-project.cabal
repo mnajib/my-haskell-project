@@ -8,8 +8,8 @@ description:         A Haskell project that includes CLI tools for algebra, spee
 author:              NajibMalaysia
 maintainer:          mnajib@gmail.com
 
--- license:             MIT
--- license-file:        LICENSE
+license:             MIT
+license-file:        LICENSE
 
 category:            Development
 build-type:          Simple
