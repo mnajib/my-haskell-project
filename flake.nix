@@ -48,12 +48,32 @@
       in
       {
 
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            pkgs.haskellPackages.ghc
-            pkgs.haskellPackages.cabal-install
-          ];
-        };
+        #devShell = pkgs.mkShell {
+        #  buildInputs = [
+        #    pkgs.haskellPackages.ghc
+        #    pkgs.haskellPackages.cabal-install
+        #    pkgs.neovim
+        #    pkgs.haskell-language-server
+        #    pkgs.haskellPackages.ormolu
+        #    pkgs.ripgrep
+        #    pkgs.cowsay
+        #  ];
+        #};
+        #
+        #devShell = pkgs.mkShell {
+        #  buildInputs = with pkgs; [
+        #    haskellPackages.ghc
+        #    haskellPackages.cabal-install
+        #    neovim
+        #    haskell-language-server
+        #    haskellPackages.ormolu
+        #    ripgrep
+        #    cowsay
+        #  ];
+        #};
+        #
+        # Separate the development environment configuration in shell.nix, so flake.nix file focus on the package definition
+        devShell = import ./shell.nix { pkgs = pkgs; };
 
         # when we build with 'nix build'
         #defaultPackage = pkgs.my-haskell-project;
