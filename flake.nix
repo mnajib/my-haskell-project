@@ -7,7 +7,11 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+    #flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachSystem [
+      "x86_64-linux"
+      #"aarch64-linux"
+    ] (system:
       let
 
         pkgs = import nixpkgs {
@@ -77,11 +81,13 @@
         #};
         #
         # Separate the development environment configuration in shell.nix, so flake.nix file focus on the package definition
-        devShell = import ./shell.nix { pkgs = pkgs; };
+        #devShell = import ./shell.nix { pkgs = pkgs; };
+        devShells.default = import ./shell.nix { pkgs = pkgs; };
 
         # when we build with 'nix build'
         #defaultPackage = pkgs.my-haskell-project;
-        defaultPackage = myHaskellProject;
+        #defaultPackage = myHaskellProject;
+        packages.default = myHaskellProject;
         # and then run it with 'nix run'
 
         # nix run .#test1
@@ -107,8 +113,14 @@
         # XXX: ???
         # Define test using the 'checks' attribute for testing
         # nix flake check
+        # nix flake check .#test1
+        # nix flake check .#test2
         checks = {
-          speed = pkgs.haskellPackages.callCabal2nix "my-haskell-project-speed-test" ./. {};
+
+          # nix flake check .#speed-functions-test
+          #speed = pkgs.haskellPackages.callCabal2nix "my-haskell-project-speed-test" ./. {};
+          speed = pkgs.haskellPackages.callCabal2nix "speed-functions-test" ./. {};
+
         };
 
       }
