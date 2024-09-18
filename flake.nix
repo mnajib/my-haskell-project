@@ -14,16 +14,16 @@
     ] (system:
       let
 
-        #pkgs = import nixpkgs {
-        #  inherit system;
+        pkgs = import nixpkgs {
+          inherit system;
           #overlays = [
           #  (self: super: {
           #    #my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" (self.flake) {};
           #    my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" ./app {};
           #  })
           #];
-        #};
-        pkgs = nixpkgs.legacyPackages.${system};
+        };
+        #pkgs = nixpkgs.legacyPackages.${system};           # 'error: expected a derivation' when run 'nix flake show'
         #pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
         # Define a custom derivation
