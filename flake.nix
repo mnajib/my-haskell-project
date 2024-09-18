@@ -14,16 +14,17 @@
     ] (system:
       let
 
-        pkgs = import nixpkgs {
-          inherit system;
+        #pkgs = import nixpkgs {
+        #  inherit system;
           #overlays = [
           #  (self: super: {
           #    #my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" (self.flake) {};
           #    my-haskell-project = super.haskellPackages.callCabal2nix "my-haskell-project" ./app {};
           #  })
           #];
-        };
-        #pkgs = nixpkgs.legacyPackages.${system};
+        #};
+        pkgs = nixpkgs.legacyPackages.${system};
+        #pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
         # Define a custom derivation
         #myHaskellProject = pkgs.haskellPackages.mkDerivation {
@@ -90,8 +91,8 @@
         packages.default = myHaskellProject;
         # and then run it with 'nix run'
 
-        # nix run .#test1
-        # nix run .#test2
+        # nix run .#test1               # not work
+        # nix run .#test2               # not work
         #
         # nix develop
         # cabal test test1
@@ -99,15 +100,14 @@
         #
         # cabal test
         apps = {
-
-          # nix run .#speed-functions-test
-          # cabal test speed-functions-test
+        #  # nix run .#speed-functions-test                  # working
+        #  # cabal test speed-functions-test                 # working
+        #  #speed-functions-test = flake-utils.lib.mkApp {
           speed-functions-test = flake-utils.lib.mkApp {
             drv = pkgs.writeShellScriptBin "run-test1" ''
               ${pkgs.cabal-install}/bin/cabal test speed-functions-test
             '';
           };
-
         };
 
         # XXX: ???
@@ -117,9 +117,20 @@
         # nix flake check .#test2
         checks = {
 
-          # nix flake check .#speed-functions-test
+          # test1:
+          # nix flake check                                 # working
+          # nix flake check .#speed-functions-test          # not working
           #speed = pkgs.haskellPackages.callCabal2nix "my-haskell-project-speed-test" ./. {};
-          speed = pkgs.haskellPackages.callCabal2nix "speed-functions-test" ./. {};
+          #speed-functions-test = pkgs.haskellPackages.callCabal2nix "my-haskell-project" ./. {};
+          speed-functions-test = myHaskellProject;         # working
+          #
+          # XXX:
+          #  nix flake check --> error
+          #  nix flake check .#speed-functions-test --> error
+          #speed-functions-test = pkgs.runCommand "speed-functions-test" { buildInputs = [ myHaskellProject ]; } ''
+          #  ${pkgs.cabal-install}/bin/cabal test speed-functions-test
+          #  touch $out
+          #'';
 
         };
 

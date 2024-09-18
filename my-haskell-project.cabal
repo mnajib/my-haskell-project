@@ -37,6 +37,7 @@ executable algebra
   default-language:    Haskell2010
 
 library
+  -- exposed-modules:     SpeedAndAccelFunctions
   exposed-modules:     SpeedFunctions
   hs-source-dirs:      src
   build-depends:       base >= 4.7 && < 5
