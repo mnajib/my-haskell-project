@@ -10,6 +10,10 @@ pkgs.mkShell {
     haskellPackages.ghc
     haskellPackages.cabal-install
 
+    haskellPackages.hspec-discover
+    haskellPackages.hspec
+    haskellPackages.hspec-contrib
+
     neovim
     haskell-language-server             # Language Server Protocol (LSP), haskell-language-server (HLS) for intelligent code completion, error checking, and more
     haskellPackages.ormolu              # Haskell formatter

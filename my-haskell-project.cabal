@@ -1,7 +1,9 @@
 cabal-version:       2.4
 -- cabal-version:       3.12
 
+-- my package name
 name:                my-haskell-project
+
 version:             0.1.0.0
 synopsis:            A simple Haskell project with CLI tools
 description:         A Haskell project that includes CLI tools for algebra, speed, and acceleration calculations.
@@ -13,6 +15,8 @@ license-file:        LICENSE
 
 category:            Development
 build-type:          Simple
+
+-- tests:               True
 
 -- hs-source-dirs:      app, src
 
@@ -32,10 +36,34 @@ executable algebra
   build-depends:       base >=4.7 && <5
   default-language:    Haskell2010
 
+library
+  exposed-modules:     SpeedFunctions
+  hs-source-dirs:      src
+  build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
+
 executable speed
   hs-source-dirs:      app, src
   main-is:             Speed.hs
   build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
+
+-- Run test with Cabal:
+--   cabal test
+-- Run test with Nix:
+--   nix build .#speed-tests
+test-suite speed-functions-test
+  type:                exitcode-stdio-1.0
+  main-is:             SpeedFunctionsSpec.hs
+  -- test-module:         SpeedFunctionsTest
+  -- other-modules:       SpeedFunctions, AnotherModule, YetAnotherModule
+  other-modules:       SpeedFunctions
+                     -- , SpeedFunctionsSpec
+  hs-source-dirs:      test, src
+  build-depends:       base >= 4.7 && <5,
+                       hspec >= 2.7 && <3,
+                       my-haskell-project,
+                       silently
   default-language:    Haskell2010
 
 executable acceleration

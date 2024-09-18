@@ -1,9 +1,10 @@
---module Speed where
 module Main where
 
 import System.Environment (getArgs)     -- getArgs to capture user input (arguments)
 import System.Exit (exitFailure)
 --import Data.List (words)
+
+import SpeedFunctions                   -- src/SpeedFunctions.hs
 
 -- Function to print help message
 printHelp :: IO ()
@@ -20,16 +21,16 @@ handleError :: IO ()
 handleError = putStrLn "Error: Invalid input.\n" >> printHelp >> exitFailure
 
 -- Function that calculate speed
-speed :: (Double, String) -> (Double, String) -> IO ()
+--speed :: (Double, String) -> (Double, String) -> IO ()
 --speed distance time = do
 --  let
 --    (distanceValue, distanceUnit) = distance
 --    (timeValue, timeUnit) = time
-speed (distanceValue, distanceUnit) (timeValue, timeUnit) = do
-  putStrLn $ "Distance: " ++ show distanceValue ++ " " ++ distanceUnit ++
-             ", Time: " ++ show timeValue ++ " " ++ timeUnit
+--speed (distanceValue, distanceUnit) (timeValue, timeUnit) = do
+  --putStrLn $ "Distance: " ++ show distanceValue ++ " " ++ distanceUnit ++
+  --           ", Time: " ++ show timeValue ++ " " ++ timeUnit
   --putStrLn $ "Speed: " ++ show (distanceValue / timeValue)
-  putStrLn $ "Speed: " ++ show (distanceValue / timeValue) ++ " " ++ distanceUnit ++ "/" ++ timeUnit
+  --putStrLn $ "Speed: " ++ show (distanceValue / timeValue) ++ " " ++ distanceUnit ++ "/" ++ timeUnit
 
 -- Main app function
 main :: IO ()

@@ -1,3 +1,6 @@
+-- TODO:
+--   - refactor algebra?
+
 --module Algebra where
 module Main where
 

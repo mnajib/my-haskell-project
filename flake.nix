@@ -19,6 +19,7 @@
           #  })
           #];
         };
+        #pkgs = nixpkgs.legacyPackages.${system};
 
         # Define a custom derivation
         #myHaskellProject = pkgs.haskellPackages.mkDerivation {
@@ -41,9 +42,12 @@
         #  '';
         #};
 
+        #haskellPackages = pkgs.haskellPackages;
+
         # Define the Haskell project using callCabal2nix
         #myHaskellProject = pkgs.haskellPackages.callCabal2nix "my-haskell-project" ./app {};
         myHaskellProject = pkgs.haskellPackages.callCabal2nix "my-haskell-project" ./. {};
+        #myHaskellProject = haskellPackages.callCabal2nix "my-haskell-project" ./. {};
 
       in
       {
@@ -79,6 +83,20 @@
         #defaultPackage = pkgs.my-haskell-project;
         defaultPackage = myHaskellProject;
         # and then run it with 'nix run'
+
+        # nix run .#test
+        apps.test = flake-utils.lib.mkApp {
+          drv = pkgs.writeShellScriptBin "" ''
+            ${pkgs.cabal-install}/bin/cabal test
+          '';
+        };
+
+        # XXX: ???
+        # Define test using the 'checks' attribute for testing
+        # nix flake check
+        checks = {
+          speed = pkgs.haskellPackages.callCabal2nix "my-haskell-project-speed-test" ./. {};
+        };
 
       }
     );
