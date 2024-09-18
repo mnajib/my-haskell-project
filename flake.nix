@@ -84,11 +84,24 @@
         defaultPackage = myHaskellProject;
         # and then run it with 'nix run'
 
-        # nix run .#test
-        apps.test = flake-utils.lib.mkApp {
-          drv = pkgs.writeShellScriptBin "" ''
-            ${pkgs.cabal-install}/bin/cabal test
-          '';
+        # nix run .#test1
+        # nix run .#test2
+        #
+        # nix develop
+        # cabal test test1
+        # cabal test test2
+        #
+        # cabal test
+        apps = {
+
+          # nix run .#speed-functions-test
+          # cabal test speed-functions-test
+          speed-functions-test = flake-utils.lib.mkApp {
+            drv = pkgs.writeShellScriptBin "run-test1" ''
+              ${pkgs.cabal-install}/bin/cabal test speed-functions-test
+            '';
+          };
+
         };
 
         # XXX: ???

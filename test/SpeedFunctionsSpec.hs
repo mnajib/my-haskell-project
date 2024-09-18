@@ -1,13 +1,15 @@
---module SpeedSpec where
-module Main (main) where
+module SpeedFunctionsSpec (spec) where
+--module Main (main) where
 --module Main where
 
 import Test.Hspec                       -- hspec is the library we use for testing. hCapture_
 import SpeedFunctions                   -- src/SpeedFunctions.hs
 import System.IO.Silently -- (capture_)
 
-main :: IO ()
-main = hspec $ do
+--main :: IO ()
+--main = hspec $ do
+spec :: Spec
+spec = do
   describe "Speed calculation" $ do
 
     it "calculates speed correctly with meters and seconds" $ do
