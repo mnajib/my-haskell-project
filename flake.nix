@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -69,21 +70,42 @@
         #  ];
         #};
         #
-        #devShell = pkgs.mkShell {
-        #  buildInputs = with pkgs; [
-        #    haskellPackages.ghc
-        #    haskellPackages.cabal-install
-        #    neovim
-        #    haskell-language-server
-        #    haskellPackages.ormolu
-        #    ripgrep
-        #    cowsay
-        #  ];
-        #};
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            haskellPackages.ghc
+            haskellPackages.cabal-install
+
+            haskellPackages.hspec-discover
+            haskellPackages.hspec
+            haskellPackages.hspec-contrib
+            haskellPackages.ormolu
+            haskellPackages.hlint
+            haskellPackages.ghcid
+            haskell-language-server
+            ripgrep
+            neovim
+            cowsay
+          ];
+
+          #PS1="$(echo $PS1 | sed 's;\\n;;g') \e[0;31m(nixdev)\e[m "
+          #PS1="$(echo $PS1 | sed 's;\\n;;g' | sed 's/\]\\\$/] \e[0;31m(nixdev)\e[m \$/g') "
+          shellHook = ''
+            echo "---> Haskell development environment loaded! <--- flake.nix"
+            echo "Available tools:"
+            echo " - GHC: $(ghc --version)"
+            echo " - Cabal: $(cabal --version | head -n 1)"
+            echo " - Ormolu: $(ormolu --version | head -n 1)"
+            echo " - HLint: $(hlint --version)"
+            echo " - Ghcid: $(ghcid --version)"
+            echo " - Haskell Language Server: $(haskell-language-server-wrapper --version)"
+            echo "Remember to run 'cabal update' if you haven't recently!"
+            PS1="$(echo $PS1 | sed 's;\\n;;g') \e[0;31m(nixdev)\e[m "
+          '';
+        };
         #
         # Separate the development environment configuration in shell.nix, so flake.nix file focus on the package definition
         #devShell = import ./shell.nix { pkgs = pkgs; };
-        devShells.default = import ./shell.nix { pkgs = pkgs; };
+        #devShells.default = import ./shell.nix { pkgs = pkgs; };
 
         # when we build with 'nix build'
         #defaultPackage = pkgs.my-haskell-project;
@@ -131,6 +153,9 @@
           #  ${pkgs.cabal-install}/bin/cabal test speed-functions-test
           #  touch $out
           #'';
+
+          #format = flake-utils.lib.checkNixFormat;          # ...
+          #lint = flake-utils.lib.checkNikLint;              # ...
 
         };
 
