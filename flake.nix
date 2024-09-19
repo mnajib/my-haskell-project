@@ -70,7 +70,8 @@
         #  ];
         #};
         #
-        devShell = pkgs.mkShell {
+        #devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             haskellPackages.ghc
             haskellPackages.cabal-install
