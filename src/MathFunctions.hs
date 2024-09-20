@@ -15,7 +15,9 @@ divideTwoNumbers x y = x `div` y
 
 sumList :: [Int] -> Int
 sumList [] = 0
-sumList (x:xs) = x + sumList xs
+-- sumList (x : xs) = x + sumList xs
+-- sumList xs = foldr (+) 0 xs -- foldr is a higher-order function
+sumList xs = sum xs -- foldr is a higher-order function
 
 fibonacci :: Int -> Int
 fibonacci 0 = 0
@@ -27,9 +29,9 @@ factorial 0 = 1
 factorial n = n * factorial (n - 1)
 
 pythagorean :: Double -> Double -> Double
-pythagorean a b = sqrt (a^2 + b^2)
+pythagorean a b = sqrt (a ^ 2 + b ^ 2)
 
 isPrime :: Int -> Bool
 isPrime n
   | n <= 1 = False
-  | otherwise = null [ x | x <- [2..n-1], n `mod` x == 0]
+  | otherwise = null [x | x <- [2 .. n - 1], n `mod` x == 0]

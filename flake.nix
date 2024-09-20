@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz"; -- Get the current unstable Nixpkgs
+    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; -- Get the current stable Nixpkgs
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2405.635167.tar.gz";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -75,17 +78,22 @@
           buildInputs = with pkgs; [
             haskellPackages.ghc
             haskellPackages.cabal-install
-
-            haskellPackages.hspec-discover
-            haskellPackages.hspec
-            haskellPackages.hspec-contrib
-            haskellPackages.ormolu
-            haskellPackages.hlint
-            haskellPackages.ghcid
-            haskell-language-server
-            ripgrep
+            haskellPackages.hspec                           # A Testing Framework for Haskell.
+            haskellPackages.hspec-contrib                   # Contributed functionality for Hspec.
+            haskellPackages.hspec-discover                  # Automatically discover and run Hspec tests.
+            haskellPackages.ormolu                          # A formatter for Haskell source code.
+                                                            # ormolu --mode inplace $(find . -name '*.hs')
+            haskellPackages.fourmolu                        # A formatter for Haskell source code.
+            haskellPackages.hlint                           # a tool that provides suggestions for improving your Haskell code.
+            haskellPackages.ghcid                           # a GHCi-based development tool that provides features like code completion and type checking.
+                                                            # ghcid -c "cabal repl"
+            haskellPackages.hoogle                          # a search engine for Haskell documentation; Haskell API search.
+            haskellPackages.haskell-language-server         # LSP server for GHC. The Haskell Language Server can be used with Neovim (or other editors) for features like auto-completion, type information, and more.
+            ripgrep #ripgrep-all                            # Utility that combines the usability of The Silver Searcher with the raw speed of grep.
             neovim
             cowsay
+
+            #jupyternotebook+ihaskel    # https://github.com/IHaskell/IHaskelll
           ];
 
           #PS1="$(echo $PS1 | sed 's;\\n;;g') \e[0;31m(nixdev)\e[m "
@@ -156,7 +164,20 @@
           #'';
 
           #format = flake-utils.lib.checkNixFormat;          # ...
+          format = pkgs.runCommand "check-format" {
+            buildInputs = [ pkgs.ormolu ];
+          } ''
+            ormolu --mode check $(find ${./.} -name '*.hs')
+            touch $out
+          '';
+
           #lint = flake-utils.lib.checkNikLint;              # ...
+          lint = pkgs.runCommand "check-lint" {
+            buildInputs = [ pkgs.hlint ];
+          } ''
+            hlint ${./.}
+            touch $out
+          '';
 
         };
 

@@ -9,6 +9,7 @@ ghc --version
 # Build and run
 ```
 nix build
+cabal build
 ./result/bin/speed-functions-test
 ```
 
@@ -17,13 +18,13 @@ nix build
 nix run .#speed-functions-test
 cabal test speed-functions-test
 cabal test
+nix flake check
 ```
 
 # nix flake
 ```
 nix flake metadata
 nix flake show
-nix flake check
 nix flake update
 ```
 
