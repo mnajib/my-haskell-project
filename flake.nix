@@ -2,12 +2,13 @@
   description = "A simple Haskell project with Nix Flakes support";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz"; -- Get the current unstable Nixpkgs
-    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; -- Get the current stable Nixpkgs
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz"; # Get the current unstable Nixpkgs
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz"; # Get the current stable Nixpkgs
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     #nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.2405.635167.tar.gz";
-    flake-utils.url = "github:numtide/flake-utils";
+    #flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "https://flakehub.com/f/numtide/flake-utils/0.1.101.tar.gz";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
@@ -87,6 +88,8 @@
             haskellPackages.hlint                           # a tool that provides suggestions for improving your Haskell code.
             haskellPackages.ghcid                           # a GHCi-based development tool that provides features like code completion and type checking.
                                                             # ghcid -c "cabal repl"
+            #haskellPackages.ihaskell                       # A Haskell backend kernel for the Jupyter project.
+            ihaskell                                        # A Haskell backend kernel for the Jupyter project. ihaskell-with-packages
             haskellPackages.hoogle                          # a search engine for Haskell documentation; Haskell API search.
             haskellPackages.haskell-language-server         # LSP server for GHC. The Haskell Language Server can be used with Neovim (or other editors) for features like auto-completion, type information, and more.
             ripgrep #ripgrep-all                            # Utility that combines the usability of The Silver Searcher with the raw speed of grep.
