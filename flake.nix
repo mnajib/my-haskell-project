@@ -88,8 +88,10 @@
             haskellPackages.hlint                           # a tool that provides suggestions for improving your Haskell code.
             haskellPackages.ghcid                           # a GHCi-based development tool that provides features like code completion and type checking.
                                                             # ghcid -c "cabal repl"
-            #haskellPackages.ihaskell                       # A Haskell backend kernel for the Jupyter project.
-            ihaskell                                        # A Haskell backend kernel for the Jupyter project. ihaskell-with-packages
+
+            jupyter                                        # A high-level dynamically-typed programming language
+            ihaskell                                       # A Haskell backend kernel for the Jupyter project. ihaskell-with-packages
+
             haskellPackages.hoogle                          # a search engine for Haskell documentation; Haskell API search.
             haskellPackages.haskell-language-server         # LSP server for GHC. The Haskell Language Server can be used with Neovim (or other editors) for features like auto-completion, type information, and more.
             ripgrep #ripgrep-all                            # Utility that combines the usability of The Silver Searcher with the raw speed of grep.
