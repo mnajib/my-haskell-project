@@ -76,6 +76,14 @@ executable acceleration
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 
+executable alarm-clock
+  hs-source-dirs:      app
+  main-is:             AlarmClockCLI.hs
+  build-depends:       base >= 4.7 && < 5,
+                       time,
+                       async
+  default-language:    Haskell2010
+
 -- NOTES:
 -- cabal build
 -- cabal exec my-haskell-project
